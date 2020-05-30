@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,57 +42,72 @@ class MyApp extends StatelessWidget{
                   color: Colors.blueGrey.shade900,
                 ),
               ),
-              Card(
-                margin: EdgeInsets.symmetric(vertical:10.0, horizontal:50.0),
-                  child: ListTile(
-                    leading: Icon(
-                        Icons.phone,
-                        color: Colors.blueGrey.shade800,
-                      ),
-                    title: Text(
-                        '+1 (949) 407-9728 ',
-                        style: TextStyle(
+              GestureDetector(
+                onTap:(){
+                  _launchCALL();
+                },
+                child: Card(
+                  margin: EdgeInsets.symmetric(vertical:10.0, horizontal:50.0),
+                    child: ListTile(
+                      leading: Icon(
+                          Icons.phone,
                           color: Colors.blueGrey.shade800,
-                          fontFamily:'BreeSerif',
-                          fontSize: 20.0,
                         ),
-                      ),
-                  ),
+                      title: Text(
+                          '+1 (949) 407-9728 ',
+                          style: TextStyle(
+                            color: Colors.blueGrey.shade800,
+                            fontFamily:'BreeSerif',
+                            fontSize: 20.0,
+                          ),
+                        ),
+                    ),
+                ),
               ),
-              Card(
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
-                  child: ListTile(
-                    leading: Icon(
-                        Icons.email,
-                        color: Colors.blueGrey.shade800,
-                      ),
-                    title: Text(
-                        'joseph.tqy@gmail.com ',
-                        style: TextStyle(
+              GestureDetector(
+                 onTap:(){
+                  _launchMAIL();
+                },
+                child: Card(
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                    child: ListTile(
+                      leading: Icon(
+                          Icons.email,
                           color: Colors.blueGrey.shade800,
-                          fontFamily:'BreeSerif',
-                          fontSize: 20.0,
                         ),
-                      ),
-                  ),
+                      title: Text(
+                          'joseph.tqy@gmail.com ',
+                          style: TextStyle(
+                            color: Colors.blueGrey.shade800,
+                            fontFamily:'BreeSerif',
+                            fontSize: 20.0,
+                          ),
+                        ),
+                    ),
+                ),
               ),
-              Card(
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
-                  child: ListTile(
-                    leading: Icon(
-                        Icons.language,
-                        color: Colors.blueGrey.shade800,
-                      ),
-                    title: Text(
-                        'joseph-tay.github.io ',
-                        style: TextStyle(
+              GestureDetector(
+                onTap:(){
+                  _launchURL();
+                },
+                child: Card(
+                  margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
+                    child: ListTile(
+                      leading: Icon(
+                          Icons.language,
                           color: Colors.blueGrey.shade800,
-                          fontFamily:'BreeSerif',
-                          fontSize: 20.0,
                         ),
-                      ),
-                  ),
-              ),
+                      title: Text(
+                          'joseph-tay.github.io ',
+                          style: TextStyle(
+                            color: Colors.blueGrey.shade800,
+                            fontFamily:'BreeSerif',
+                            fontSize: 20.0,
+                          ),
+                        ),
+                    ),
+                ),
+              ), 
             ],
           )
         )
@@ -102,3 +117,29 @@ class MyApp extends StatelessWidget{
 }
 
 
+_launchURL() async {
+    const url = 'https://joseph-tay.github.io';
+    if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchMAIL() async {
+    const url = 'mailto:joseph.tqy@gmail.com';
+    if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+_launchCALL() async {
+    const url = 'tel:+1 949 407 9728';
+    if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
